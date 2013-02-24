@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+
+	<title>Canvas Track</title>
+
+
+    <link rel="stylesheet" type="text/css" href="_css/style.css" />
+
+</head>
+<body>
+
+	<input type="file" id="inp-image" />
+
+	<input type="button" id="inp-start-track" value="track!" />
+	
+	<div id="bg-customization">
+		<label for="inp-bg-color">Pick a color for the background if needed</label>
+		<input type="color" id="inp-bg-color" value="#000000" />
+
+		<label for="inp-bg-alpha">Pick a color for the background if needed</label>
+		<input type="range" id="inp-bg-alpha" min="0" max="100" value="100" />
+	</div>
+
+	<div id="canvas-wrap">
+		<!-- <canvas id="playNowWithLights" width="786" height="450"></canvas> -->
+		<canvas id="canvas-bg" width="685" height="420"></canvas>
+		<canvas id="canvas" width="685" height="420"></canvas>
+	</div>
+	<pre id="result-to-array">
+
+	</pre>
+
+	<img id="img-final" />
+
+	<script src="_js/main.js"></script>
+	<script src="_js/file_api.js"></script>
+	<script src="_js/events.js"></script>
+	<script src="_js/paint_dots.js"></script>
+	<script src="_js/paint_track.js"></script>
+	<script src="_js/triforce.js"></script>
+	<script src="_js/run_visual_tests.js"></script>
+	<script src="_js/base.js"></script>
+
+</body>
+</html>
