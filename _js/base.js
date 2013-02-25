@@ -1,4 +1,9 @@
-main.init();
+
+window.main.register('base', function (events, fileAPI) {
+
+    console.log('[base]', events, fileAPI);
+
+});
 
 /*
 (function (main) {
@@ -106,3 +111,5 @@ main.init();
 })(window.main);
 
 */
+
+window.main.init();
