@@ -10,9 +10,9 @@ window.Main = {
 		var areModulesInstalled = this.installModules(moduleList);
 
 		if (areModulesInstalled) {
-			console.log('Modules are installed');
+			// console.log('Modules are installed');
 		} else {
-			console.log('Not all modules were installed');
+			// console.log('Not all modules were installed');
 		}
 	},
 	register: function (namespace, dependencies, fn) {
@@ -67,8 +67,6 @@ window.Main = {
 			areDependenciesLoaded = false,
 			dependenciesNames,
 			dependencyArr;
-
-console.log('[installModules] [moduleList]', moduleList);
 
 		for (var i = 0; i < moduleList.length; i ++) {
 
