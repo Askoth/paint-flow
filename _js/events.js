@@ -11,16 +11,14 @@ console.log('[events]', arguments);
         
         mapArr = mapDots(imgDataArr);
 
-        showCenter();
-
-        main.paintTrack(ctx, canvas);
+        paintTrack(ctx, canvas);
 
         //sorts to make all elements go clockwise
         // main.triforce.setCenterToSort = setCenterToSort;
         // mapArr.sort(main.triforce.sortFn);
 
 
-        main.runVisualTests(mapArr, ctx);
+        // main.runVisualTests(mapArr, ctx);
 
 
         //###### result array ######

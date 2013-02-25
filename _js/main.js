@@ -41,7 +41,6 @@ window.main = {
 
 			this.dependencyList[namespace] = dependencies;
 
-			console.log('[register]', namespace, this.dependencyList[namespace]);
 		} else {
 			this.dependencyList[namespace] = [];
 		}
@@ -97,12 +96,10 @@ window.main = {
 				}
 
 				if (dependencyList[a].indexOf(b) != -1) {
-					console.log('case1', dependencyList[a], dependencyList[b], dependencyList[a] && dependencyList[a].indexOf(b))
 					return +1;
 				}
 
 				if (dependencyList[b].indexOf(a) != -1) {
-					console.log('case2', dependencyList[a], dependencyList[b], dependencyList[a] && dependencyList[b].indexOf(a))
 					return -1;
 				}
 
@@ -126,8 +123,6 @@ window.main = {
 		while (i--) {
 			dependencyArr.unshift(loadedModules[names[i]]);
 		}
-
-console.log('[getDependencies]', names, dependencyArr);
 
 		return dependencyArr;
 
