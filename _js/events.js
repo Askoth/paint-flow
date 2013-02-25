@@ -27,14 +27,31 @@ window.main.register('events', function () {
 
     });
 
-    document.getElementById('inp-bg-color').addEventListener('change', function () {
-        document.getElementById('canvas-wrap').style.backgroundColor = this.value;
-    });
+    //color
+    document.getElementById('inp-bg-color').addEventListener('change', changeColor);
 
-    document.getElementById('inp-bg-alpha').addEventListener('change', function () {
+    changeColor(document.getElementById('inp-bg-color'));
+
+    function changeColor (el) {
+
+        if (!el) {
+            el = this;
+        }
+
+        document.getElementById('canvas-wrap').style.backgroundColor = el.value;
+    }
+
+    //alpha
+    document.getElementById('inp-bg-alpha').addEventListener('change', changeAlpha);
+
+    function changeAlpha (el) {
 
         var color = document.getElementById('canvas-wrap').style.backgroundColor,
             result = '';
+
+        if (!el) {
+            el = this;
+        }
 
         color = color.replace(/[^0-9|,]/g, '');
 
@@ -45,9 +62,8 @@ window.main.register('events', function () {
             return;
         }
 
-        result = 'rgba(' + color.join(',') + ',' + this.value/100 + ')';
-        console.log(document.getElementById('canvas-wrap').style.backgroundColor);
+        result = 'rgba(' + color.join(',') + ',' + el.value/100 + ')';
 
         document.getElementById('canvas-wrap').style.backgroundColor = result;
-    });
-})
+    }
+});
