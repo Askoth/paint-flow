@@ -1,8 +1,9 @@
-main.paintDots = function (ctx) {
+window.main.register('paintDots', function () {
+	return function (ctx) {
 
-
-    document.getElementById('canvas').addEventListener('click', function (e) {
-        ctx.fillStyle = "rgb(0,0,0)";
-        ctx.fillRect (e.layerX, e.layerY, 13, 13);
-    });
-};
+	    document.getElementById('canvas').addEventListener('click', function (e) {
+	        ctx.fillStyle = "rgb(0,0,0)";
+	        ctx.fillRect (e.layerX, e.layerY, 13, 13);
+	    });
+	};
+});

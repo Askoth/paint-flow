@@ -1,10 +1,14 @@
-window.main.register('events', function () {
+window.main.register('events', function (mapDots, paintTrack) {
+
+console.log('[events]', arguments);
 
     document.getElementById('inp-start-track').addEventListener('click', function () {
-
-        var imgDataArr = ctx.getImageData(0, 0, canvas.width, canvas.height).data,
+        var canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d'),
+            imgDataArr = ctx.getImageData(0, 0, canvas.width, canvas.height).data,
             mapArr;
 
+        
         mapArr = mapDots(imgDataArr);
 
         showCenter();
@@ -12,8 +16,8 @@ window.main.register('events', function () {
         main.paintTrack(ctx, canvas);
 
         //sorts to make all elements go clockwise
-        main.triforce.setCenterToSort = setCenterToSort;
-        mapArr.sort(main.triforce.sortFn);
+        // main.triforce.setCenterToSort = setCenterToSort;
+        // mapArr.sort(main.triforce.sortFn);
 
 
         main.runVisualTests(mapArr, ctx);

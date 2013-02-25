@@ -1,6 +1,6 @@
 'use strict';
 
-window.main.register('base', function (events, fileAPI) {
+window.main.register('base', function (events, fileAPI, paintDots) {
 
     //guide http://beej.us/blog/data/html5s-canvas-2-pixel/
     var canvas = document.getElementById('canvas'),
@@ -41,6 +41,8 @@ window.main.register('base', function (events, fileAPI) {
         img.src = e.target.result;
 
     });
+
+    paintDots(ctx);
 
 });
 

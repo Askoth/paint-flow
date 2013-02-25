@@ -14,8 +14,6 @@ window.main = {
 		} else {
 			console.log('Not all modules were installed');
 		}
-
-		// window.main[namespace] = this.module[namespace]();
 	},
 	register: function (namespace, dependencies, fn) {
 		module = this.module;
@@ -43,7 +41,9 @@ window.main = {
 
 			this.dependencyList[namespace] = dependencies;
 
-			console.log('[register]', this.dependencyList[namespace]);
+			console.log('[register]', namespace, this.dependencyList[namespace]);
+		} else {
+			this.dependencyList[namespace] = [];
 		}
 
 	},
@@ -72,6 +72,7 @@ window.main = {
 		for (var i = 0; i < moduleList.length; i ++) {
 
 			dependenciesNames = moduleList[i];
+
 			dependencyArr = this.getDependencies(this.dependencyList[dependenciesNames]);
 
 			this.loadedModules[dependenciesNames] = this.module[dependenciesNames].apply(this, dependencyArr);
@@ -85,14 +86,23 @@ window.main = {
 	},
 
 	sortModules: function (moduleList, dependencyList) {
-
 		var sortModuleDependencies = function (a, b) {
 
-				if (dependencyList[a] && dependencyList[a].indexOf(b) != -1) {
+				if (dependencyList[a].length == 0) {
+					return -1;
+				}
+
+				if (dependencyList[b].length == 0) {
 					return +1;
 				}
 
-				if (dependencyList[b] && dependencyList[b].indexOf(a) != -1) {
+				if (dependencyList[a].indexOf(b) != -1) {
+					console.log('case1', dependencyList[a], dependencyList[b], dependencyList[a] && dependencyList[a].indexOf(b))
+					return +1;
+				}
+
+				if (dependencyList[b].indexOf(a) != -1) {
+					console.log('case2', dependencyList[a], dependencyList[b], dependencyList[a] && dependencyList[b].indexOf(a))
 					return -1;
 				}
 
@@ -116,6 +126,8 @@ window.main = {
 		while (i--) {
 			dependencyArr.unshift(loadedModules[names[i]]);
 		}
+
+console.log('[getDependencies]', names, dependencyArr);
 
 		return dependencyArr;
 

@@ -1,4 +1,4 @@
-window.main.register('fileAPI', function (events) {
+window.main.register('fileAPI', function () {
 	return function (el, callback) {
 
 	    document.getElementById(el).addEventListener('change', function (e) {
