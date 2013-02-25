@@ -1,4 +1,4 @@
-window.main.register('mapDots', function () {
+window.Main.register('mapDots', function () {
     return function (imgDataArr) {
 
         var curAlpha = 0,

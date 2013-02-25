@@ -1,6 +1,6 @@
 'use strict';
 
-window.main.register('base', function (events, fileAPI, paintDots) {
+window.Main.register('base', function (events, fileAPI, paintDots) {
 
     //guide http://beej.us/blog/data/html5s-canvas-2-pixel/
     var canvas = document.getElementById('canvas'),
@@ -153,4 +153,4 @@ window.main.register('base', function (events, fileAPI, paintDots) {
 
 */
 
-window.main.init();
+window.Main.init();

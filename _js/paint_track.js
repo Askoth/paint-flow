@@ -1,4 +1,4 @@
-window.main.register('paintTrack', function () { 
+window.Main.register('paintTrack', function () { 
 	return function (ctx, canvas) {
 
 	  //   var img = new Image();   // Create new img element

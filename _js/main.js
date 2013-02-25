@@ -1,4 +1,4 @@
-window.main = {
+window.Main = {
 	module: {},
 	dependencyList: {},
 	loadedModules: {},

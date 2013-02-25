@@ -1,6 +1,4 @@
-window.main.register('events', function (mapDots, paintTrack) {
-
-console.log('[events]', arguments);
+window.Main.register('events', function (mapDots, paintTrack) {
 
     document.getElementById('inp-start-track').addEventListener('click', function () {
         var canvas = document.getElementById('canvas'),
@@ -12,14 +10,6 @@ console.log('[events]', arguments);
         mapArr = mapDots(imgDataArr);
 
         paintTrack(ctx, canvas);
-
-        //sorts to make all elements go clockwise
-        // main.triforce.setCenterToSort = setCenterToSort;
-        // mapArr.sort(main.triforce.sortFn);
-
-
-        // main.runVisualTests(mapArr, ctx);
-
 
         //###### result array ######
         document.getElementById('result-to-array').innerHTML = 
@@ -35,8 +25,7 @@ console.log('[events]', arguments);
     changeColor(document.getElementById('inp-bg-color'));
 
     function changeColor (el) {
-
-        if (!el) {
+        if (!el || !el.value) {
             el = this;
         }
 
@@ -51,7 +40,7 @@ console.log('[events]', arguments);
         var color = document.getElementById('canvas-wrap').style.backgroundColor,
             result = '';
 
-        if (!el) {
+        if (!el || !el.value) {
             el = this;
         }
 

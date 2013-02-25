@@ -1,4 +1,4 @@
-window.main.register('paintDots', function () {
+window.Main.register('paintDots', function () {
 	return function (ctx) {
 
 	    document.getElementById('canvas').addEventListener('click', function (e) {
