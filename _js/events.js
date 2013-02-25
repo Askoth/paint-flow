@@ -1,15 +1,30 @@
-window.Main.register('events', function (mapDots, paintTrack) {
+window.Main.register('events', function (mapDots, paintTrack, canvas, ctx) {
 
     document.getElementById('inp-start-track').addEventListener('click', function () {
-        var canvas = document.getElementById('canvas'),
-            ctx = canvas.getContext('2d'),
-            imgDataArr = ctx.getImageData(0, 0, canvas.width, canvas.height).data,
+        var imgDataArr = ctx.getImageData(0, 0, canvas.width, canvas.height).data,
             mapArr;
 
         
         mapArr = mapDots(imgDataArr);
 
-        paintTrack(ctx, canvas);
+        paintTrack();
+
+        //###### result array ######
+        document.getElementById('result-to-array').innerHTML = 
+        JSON.stringify(mapArr, null, '    ')
+            .replace(/\n\s*?([0-9,])/g, '$1')
+            .replace(/([0-9]+)[^0-9\]]*\n.*?\]/g, '$1]');
+
+    });
+
+    document.getElementById('inp-start-flow').addEventListener('click', function () {
+        var imgDataArr = ctx.getImageData(0, 0, canvas.width, canvas.height).data,
+            mapArr;
+
+        
+        mapArr = mapDots(imgDataArr);
+
+        paintTrack();
 
         //###### result array ######
         document.getElementById('result-to-array').innerHTML = 

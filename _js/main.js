@@ -68,6 +68,8 @@ window.Main = {
 			dependenciesNames,
 			dependencyArr;
 
+console.log('[installModules] [moduleList]', moduleList);
+
 		for (var i = 0; i < moduleList.length; i ++) {
 
 			dependenciesNames = moduleList[i];
@@ -85,28 +87,69 @@ window.Main = {
 	},
 
 	sortModules: function (moduleList, dependencyList) {
-		var sortModuleDependencies = function (a, b) {
 
-				if (dependencyList[a].length == 0) {
-					return -1;
+		var oldModuleList = [].concat(moduleList),
+			newModuleList = [],
+			notifications = {
+				on: this.on,
+				trigger: this.trigger
+			},
+			placeBehind = {},
+
+			//loops
+			i,
+			j;
+
+		function notificationCallback (moduleName) {
+			return function (dependency) {
+
+				var currentDependencies = placeBehind[moduleName],
+					dependencyIndex = placeBehind[moduleName].indexOf(dependency);
+
+				placeBehind[moduleName].splice(dependencyIndex, 1);
+
+				if (placeBehind[moduleName].length == 0) {
+					newModuleList.push(moduleName);
+					notifications.trigger(moduleName);
 				}
 
-				if (dependencyList[b].length == 0) {
-					return +1;
-				}
+			}
+		}
 
-				if (dependencyList[a].indexOf(b) != -1) {
-					return +1;
-				}
 
-				if (dependencyList[b].indexOf(a) != -1) {
-					return -1;
-				}
+		//modules with dependencies
+		//use event emitter logic
+		var moduleName = oldModuleList[i],
+				thisModuleDependencyList;
 
-				return a - b;
-			};
+		for (i = 0; i < oldModuleList.length; i++) {
 
-		return moduleList.sort(sortModuleDependencies);
+			moduleName = oldModuleList[i];
+			thisModuleDependencyList = [].concat(dependencyList[moduleName]);
+
+			placeBehind[moduleName] = thisModuleDependencyList;
+
+			for (j = 0; j < thisModuleDependencyList.length; j++) {
+
+				notifications.on(thisModuleDependencyList[j], new notificationCallback(moduleName))
+
+			}
+			
+		}
+
+
+		//modules without dependencies
+		for (i = 0; i < oldModuleList.length; i++) {
+			if (dependencyList[oldModuleList[i]].length == 0) {
+				newModuleList.push(oldModuleList[i]);
+
+				// oldModuleList.splice(i, 1);
+				
+				notifications.trigger(oldModuleList[i]);
+			}
+		}
+
+		return newModuleList;
 
 	},
 
@@ -148,6 +191,33 @@ window.Main = {
 		}
 
 		return areDependenciesRegistered;
+	},
+
+	//maybe further use later on
+	on: function (event, callback) {
+
+		if (!this.registeredListeners) {
+			this.registeredListeners = {};
+		}
+
+		if (!this.registeredListeners[event]) {
+			this.registeredListeners[event] = [];
+		}
+
+		this.registeredListeners[event].push(callback);
+	},
+	trigger: function (event) {
+
+		if (!this.registeredListeners || !this.registeredListeners[event]) {
+			return;
+		}
+
+		var callbacks = this.registeredListeners[event],
+			args = Array.prototype.slice.call(arguments, 1);
+
+		for (var i = 0; i < callbacks.length; i++) {
+			callbacks[i].apply(this, args);
+		}
 	}
 
 };
